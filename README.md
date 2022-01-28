@@ -18,7 +18,7 @@ Routes are defined in `routes/web.php` and controllers are located in `controlle
 
 Views are defined in `resources/views`. PHP and HTML views are supported. Views can also be in sudirectories using dot syntax e.g. `sub.dir.file`. File extension should be omitted.
 
-Assets can be compiled with Laravel Mix using npm scripts: `dev`, `watch` or `prod`. Script use TypeScript and styles SCSS. Source assets are located in `resources/ts` and `resources/scss`.
+Assets can be compiled with Laravel Mix using npm scripts: `dev`, `watch` or `prod`. Scripts use TypeScript and styles SCSS. Source assets are located in `resources/ts` and `resources/scss`.
 
 `app` folder has framework code in it and routing is handled in `public/index.php` and `.htaccess`.
 

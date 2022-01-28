@@ -9,7 +9,7 @@ $path = isset($_GET['path']) ? $_GET['path'] : '/';
 
 if(in_array($path, array_keys(Route::$routes)))
 {
-    call_user_func(Route::$routes[$path]);
+    echo call_user_func(Route::$routes[$path]);
 
     exit;
 }

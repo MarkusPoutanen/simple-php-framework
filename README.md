@@ -2,6 +2,14 @@
 
 This is a Laravel-inspired simple custom MVC-based PHP framework.
 
+## Features
+
+- GET routes
+- Controllers to handle routes
+- PHP and HTML views with subdirectory support via dot syntax e.g. `sub.dir`
+- Helper class for helping functions e.g. `Helper::view()`
+- TS and SCSS compilation via Laravel Mix
+
 ## How to use
 
 Clone repository and run `npm install` in root directory.

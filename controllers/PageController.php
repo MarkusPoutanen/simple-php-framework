@@ -2,10 +2,12 @@
 
 namespace Controllers;
 
+use App\Helper;
+
 class PageController
 {
     public function frontpage()
     {
-        echo 'Hello World!';
+        return Helper::view('frontpage');
     }
 }

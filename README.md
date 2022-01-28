@@ -16,7 +16,7 @@ Clone repository and run `npm install` in root directory.
 
 Routes are defined in `routes/web.php` and controllers are located in `controllers`.
 
-Views are defined in `resources/views`. PHP and HTML views are supported. Views can also be in sudirectories using dot syntax e.g. `sub.dir.file`. File extension can be omitted.
+Views are defined in `resources/views`. PHP and HTML views are supported. Views can also be in sudirectories using dot syntax e.g. `sub.dir.file`. File extension should be omitted.
 
 Assets can be compiled with Laravel Mix using npm scripts: `dev`, `watch` or `prod`. Script use TypeScript and styles SCSS. Source assets are located in `resources/ts` and `resources/scss`.
 

@@ -1,0 +1,28 @@
+*,
+*::before,
+*::after
+{
+    box-sizing: border-box;
+}
+
+html
+{
+    font-size: 100%;
+    color: #262626;
+    line-height: 1.5;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body
+{
+    margin: 0;
+    background: #fafafa;
+}
+
+.main
+{
+    margin: 0 auto;
+    display: block;
+    padding: 0 1rem;
+    max-width: 35rem;
+}

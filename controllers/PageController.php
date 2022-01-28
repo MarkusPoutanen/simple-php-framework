@@ -10,4 +10,9 @@ class PageController
     {
         return Helper::view('frontpage');
     }
+
+    public function world()
+    {
+        return Helper::view('hello.world');
+    }
 }

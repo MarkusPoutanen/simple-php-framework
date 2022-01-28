@@ -10,3 +10,5 @@ use Controllers\PageController;
 Route::get('info', [InfoController::class, 'info']);
 
 Route::get('/', [PageController::class, 'frontpage']);
+
+Route::get('hello', [PageController::class, 'world']);

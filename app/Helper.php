@@ -4,9 +4,14 @@ namespace App;
 
 class Helper
 {
-    public static function view($name)
+    public static function view($name, $variables = null)
     {
         $full_path = __DIR__ . '/../resources/views/' . strtr($name, ['.' => '/']);
+
+        if($variables !== null)
+        {
+            extract($variables);
+        }
 
         if(file_exists($full_path . '.php'))
         {

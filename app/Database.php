@@ -8,7 +8,7 @@ class Database
 {
 	public static function connect()
 	{
-		$env_path = __DIR__ . '/../env.ini';
+		$env_path = __DIR__ . '/../.env';
 
 		if(file_exists($env_path) === false)
 		{

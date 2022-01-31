@@ -16,7 +16,10 @@
     
             <h2>Demo pages</h2>
             <p>These pages demonstrate framework's features.</p>
-            <a href="/hello">HTML view in a subdirectory</a>
+            <ul>
+                <li><a href="/hello">HTML view in a subdirectory</a></li>
+                <li><a href="/articles">Models from database</a></li>
+            </ul>
         </main>
     </body>
 </html>

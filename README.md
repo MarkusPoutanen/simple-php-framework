@@ -35,4 +35,4 @@ Assets can be compiled with Laravel Mix using npm scripts: `dev`, `watch` or `pr
 
 ## Contributions
 
-This is only for my own learning and I don't accept Pull Requests or Issues.
+This is only for my own learning and I don't accept Pull Requests or Issues at this time. Feel free to fork and improve this further.

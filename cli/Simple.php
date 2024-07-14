@@ -8,6 +8,22 @@ use PDO;
 
 class Simple
 {
+	public static function install()
+	{
+		Simple::line('Installing Simple PHP Framework...');
+
+		if(file_exists(__DIR__ . '/../.env') === false)
+		{
+			Simple::line('.env file is missing, copying defaults...');
+
+			copy(__DIR__ . '/../.env.example', __DIR__ . '/../.env');
+
+			Simple::success('.env file created!');
+		}
+
+		Simple::success('Install completed!');
+	}
+
 	public static function migrations()
 	{
 		$connection = Database::connect();
@@ -15,9 +31,9 @@ class Simple
 		$done_migrations = Simple::getDoneMigrations();
 
 		echo "Running migrations..." . PHP_EOL;
-		
+
 		$scanned_directory = array_diff(scandir('migrations'), array('..', '.'));
-		
+
 		foreach($scanned_directory as $filename)
 		{
 			echo 'Migrating: ' . $filename . "\t";
@@ -29,13 +45,13 @@ class Simple
 				echo Simple::colored('[SKIPPED]', 'yellow') . PHP_EOL;
 				continue;
 			}
-			
+
 			$migration = new $class;
 
 			try
 			{
 				$connection->query('INSERT INTO migrations VALUES (NULL, "' . $filename . '");');
-				
+
 				$migration::run();
 
 				echo Simple::colored('[OK]', 'green') . PHP_EOL;
@@ -80,10 +96,26 @@ class Simple
 		return "\033" . $colors[$color] . $string . "\033[0m";
 	}
 
+	private static function line($message)
+	{
+		Simple::printLine("[INFO] {$message}");
+	}
+
+	private static function success($message)
+	{
+		Simple::printLine(Simple::colored('[OK]', 'green') . " {$message}");
+	}
+
+	private static function printLine($message)
+	{
+		echo $message . PHP_EOL;
+	}
+
 	public static function help()
 	{
 		$commands = [
 			'help'	  => 'Display available commands',
+			'install' => 'Install settings',
 			'migrate' => 'Run all available migrations',
 		];
 

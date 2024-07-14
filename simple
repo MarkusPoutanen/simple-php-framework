@@ -4,17 +4,23 @@ include 'autoload.php';
 
 use Cli\Simple;
 
+if(in_array('install', $argv))
+{
+	Simple::install();
+
+	exit;
+}
+
 if(in_array('migrate', $argv))
 {
 	Simple::migrations();
-	
+
 	exit;
 }
 
 if(in_array('help', $argv))
 {
 	Simple::help();
-	
+
 	exit;
 }
-

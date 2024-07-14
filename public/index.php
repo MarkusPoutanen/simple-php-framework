@@ -5,7 +5,7 @@ include __DIR__ . '/../routes/web.php';
 
 use App\Route;
 
-if(file_exists('.env') === false)
+if(file_exists(__DIR__ . '/../.env') === false)
 {
     echo '<b>.ENV file is missing.</b><br>Copy .env.example and add settings.';
     exit;

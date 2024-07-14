@@ -5,6 +5,12 @@ include __DIR__ . '/../routes/web.php';
 
 use App\Route;
 
+if(file_exists('.env') === false)
+{
+    echo '<b>.ENV file is missing.</b><br>Copy .env.example and add settings.';
+    exit;
+}
+
 $path = isset($_GET['path']) ? $_GET['path'] : '/';
 
 // Match static paths

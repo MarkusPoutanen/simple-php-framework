@@ -10,7 +10,7 @@ This is a Laravel-inspired simple custom MVC-based PHP framework.
 - CLI tool `simple`
 - Models (DB data not yet casted to models)
 - PHP and HTML views with subdirectory support via dot syntax e.g. `dir.view`
-- TS and SCSS compilation via Laravel Mix
+- Asset compilation via Parcel
 
 ## How to use
 
@@ -31,7 +31,7 @@ Routing is handled in `app/Route.php`, `public/index.php` and `.htaccess`.
 
 Views are defined in `resources/views`. PHP and HTML views are supported. Views can also be in sudirectories using dot syntax e.g. `sub.dir.file`. File extension should be omitted.
 
-Assets can be compiled with Laravel Mix using npm scripts: `dev`, `watch` or `prod`. Scripts use TypeScript and styles use SCSS. Source assets are located in `resources/ts` and `resources/scss`.
+Assets can be compiled with Parcel using npm scripts: `dev`, `watch` or `prod`. Scripts use TypeScript and styles use SCSS. Source assets are located in `resources/js` and `resources/css`.
 
 ## Contributions
 

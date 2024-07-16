@@ -35,13 +35,8 @@ class Helper
      */
     public static function asset(string $asset_path): string
     {
-        $file_path = __DIR__ . '/../public/' . $asset_path;
+        file_path = __DIR__ . '/../public/' . $asset_path;
 
-        if(file_exists($file_path) === false)
-        {
-            return '';
-        }
-
-        return "/{$asset_path}?ver=" . md5_file($file_path);
+        return file_exists($file_path) ? "/{$asset_path}?ver=" . hash_file('xxh3', $file_path) : '';
     }
 }

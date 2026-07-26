@@ -33,6 +33,10 @@ Views are defined in `resources/views`. PHP and HTML views are supported. Views 
 
 Assets can be compiled with Parcel using npm scripts: `dev`, `watch` or `prod`. Scripts use TypeScript and styles use SCSS. Source assets are located in `resources/js` and `resources/css`.
 
+## Code quality
+
+This project uses PHPStan for static analysis.
+
 ## Contributions
 
 This is only for my own learning and I don't accept Pull Requests or Issues at this time. Feel free to fork and improve this further.

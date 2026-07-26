@@ -6,7 +6,20 @@ use \PDO;
 
 class Database
 {
+	private static ?PDO $connection = null;
+
+	/** Establishes and caches database connection */
 	public static function connection(): PDO
+	{
+		if(self::$connection === null)
+		{
+			self::$connection = self::establishConnection();
+		}
+
+		return self::$connection;
+	}
+
+	private static function establishConnection(): PDO
 	{
 		$env_path = __DIR__ . '/../.env';
 

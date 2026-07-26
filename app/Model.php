@@ -7,19 +7,7 @@ use App\Database;
 
 class Model
 {
-	private static ?PDO $connection = null;
 	private static string $tableName;
-
-	/** Establishes and caches database connection */
-	private static function connection(): PDO
-	{
-		if(self::$connection === null)
-		{
-			self::$connection = Database::connection();
-		}
-
-		return self::$connection;
-	}
 
 	/** Infers and caches database table name from class name */
 	private static function tableName(): string
@@ -42,7 +30,7 @@ class Model
 	/** @return array<object> */
 	public static function all(): array
 	{
-		$query = self::connection()->query('SELECT * FROM ' . self::tableName() . ';');
+		$query = Database::connection()->query('SELECT * FROM ' . self::tableName() . ';');
 
 		if($query === false)
 		{
@@ -54,7 +42,7 @@ class Model
 
 	public static function find(int $id): bool|object|null
 	{
-		$query = self::connection()->query('SELECT * FROM ' . self::tableName() . " WHERE id = {$id} ORDER BY id ASC LIMIT 1;");
+		$query = Database::connection()->query('SELECT * FROM ' . self::tableName() . " WHERE id = {$id} ORDER BY id ASC LIMIT 1;");
 
 		if($query === false)
 		{

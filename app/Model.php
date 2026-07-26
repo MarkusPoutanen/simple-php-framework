@@ -56,7 +56,7 @@ class Model
 	{
 		$model = self::find($id);
 
-		if($model === null)
+		if($model === null || $model === false)
 		{
 			http_response_code(404);
 			exit;

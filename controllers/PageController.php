@@ -27,7 +27,7 @@ class PageController
     public function show_article(int $id): null
     {
         return Helper::view('article', [
-            'article' => Article::find($id)
+            'article' => Article::findOrFail($id)
         ]);
     }
 }

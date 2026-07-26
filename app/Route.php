@@ -4,22 +4,29 @@ namespace App;
 
 class Route
 {
-    public static $routes = [];
-    public static $dynamicRoutes = [];
+    /** @var array<string, array{0: object, 1: callable|string}> */
+    public static array $routes = [];
 
-    public static function get($path, $class_and_method)
+    /** @var array<string, array{0: object, 1: callable|string}> */
+    public static array $dynamicRoutes = [];
+
+    /**
+     * @param string $path
+     * @param array{0: class-string, 1: callable|string} $class_and_method
+     */
+    public static function get(string $path, array $class_and_method): void
     {
         if($_SERVER['REQUEST_METHOD'] !== 'GET')
         {
-            http_response_code(404);
+            http_response_code(405);
             exit;
         }
 
-        if(is_array($class_and_method) === false|| count($class_and_method) < 2)
+        if(count($class_and_method) !== 2)
         {
-            throw new \Exception('Class and Method argument invalid!');
+            throw new \Exception('Class or Method invalid!');
         }
-        
+
         preg_match('/{(.+)}/', $path, $matches);
 
         if(isset($matches[1]))
@@ -28,32 +35,25 @@ class Route
             $path_as_regex = strtr($path_as_regex, [$matches[0] => '(.+)']);
             $path_as_regex = '/' . $path_as_regex . '/';
 
-            Route::registerDynamic($path_as_regex, $class_and_method[0], $class_and_method[1]);
+            self::$dynamicRoutes[$path_as_regex] = self::getCallable($class_and_method[0], $class_and_method[1]);
+
+            return;
         }
 
-        Route::register($path, $class_and_method[0], $class_and_method[1]);
+        self::$routes[$path] = self::getCallable($class_and_method[0], $class_and_method[1]);
     }
 
-    private static function register($path, $class, $function)
-    {
-        $callable = Route::getCallable($class, $function);
-
-        Route::$routes[$path] = $callable;
-    }
-
-    private static function registerDynamic($pathAsRegex, $class, $function)
-    {
-        $callable = Route::getCallable($class, $function);
-
-        Route::$dynamicRoutes[$pathAsRegex] = $callable;
-    }
-
-    private static function getCallable($class, $function)
+    /**
+     * @param class-string $class
+     * @param callable|string $method
+     * @return array{0: object, 1: callable|string}
+     */
+    private static function getCallable(string $class, callable|string $method): array
     {
         $obj_instance = new $class;
-        
-        $callable = [$obj_instance, $function];
-        
+
+        $callable = [$obj_instance, $method];
+
         if(is_callable($callable) === false)
         {
             throw new \Exception('Callable name is invalid!');

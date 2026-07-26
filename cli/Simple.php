@@ -8,7 +8,7 @@ use PDO;
 
 class Simple
 {
-	public static function install()
+	public static function install(): void
 	{
 		Simple::line('Installing Simple PHP Framework...');
 
@@ -24,9 +24,9 @@ class Simple
 		Simple::success('Install completed!');
 	}
 
-	public static function migrations()
+	public static function migrations(): void
 	{
-		$connection = Database::connect();
+		$connection = Database::connection();
 
 		$done_migrations = Simple::getDoneMigrations();
 
@@ -38,13 +38,13 @@ class Simple
 		{
 			echo 'Migrating: ' . $filename . "\t";
 
-			$class = 'Migrations\\' . explode('.', $filename)[0];
-
 			if(in_array($filename, $done_migrations))
 			{
 				echo Simple::colored('[SKIPPED]', 'yellow') . PHP_EOL;
 				continue;
 			}
+
+			$class = 'Migrations\\' . explode('.', $filename)[0];
 
 			$migration = new $class;
 
@@ -60,15 +60,15 @@ class Simple
 			{
 				echo Simple::colored('[FAILED]', 'red') . "\t" . $e->getMessage() . PHP_EOL;
 			}
-
 		}
 
 		echo 'All migrations done!';
 	}
 
-	private static function getDoneMigrations()
+	/** @return array<string> */
+	private static function getDoneMigrations(): array
 	{
-		$connection = Database::connect();
+		$connection = Database::connection();
 
 		try
 		{
@@ -82,10 +82,17 @@ class Simple
 			]);
 		}
 
-		return $connection->query('SELECT name FROM migrations;')->fetchAll(PDO::FETCH_COLUMN);
+		$query = $connection->query('SELECT name FROM migrations;');
+
+		if($query === false)
+		{
+			return [];
+		}
+
+		return $query->fetchAll(PDO::FETCH_COLUMN);
 	}
 
-	private static function colored($string, $color)
+	private static function colored(string $string, string $color): string
 	{
 		$colors = [
 			'red' 	 => '[91m',
@@ -93,25 +100,25 @@ class Simple
 			'yellow' => '[93m',
 		];
 
-		return "\033" . $colors[$color] . $string . "\033[0m";
+		return "\033{$colors[$color]}{$string}\033[0m";
 	}
 
-	private static function line($message)
+	private static function line(string $message): void
 	{
 		Simple::printLine("[INFO] {$message}");
 	}
 
-	private static function success($message)
+	private static function success(string $message): void
 	{
 		Simple::printLine(Simple::colored('[OK]', 'green') . " {$message}");
 	}
 
-	private static function printLine($message)
+	private static function printLine(string $message): void
 	{
 		echo $message . PHP_EOL;
 	}
 
-	public static function help()
+	public static function help(): void
 	{
 		$commands = [
 			'help'	  => 'Display available commands',

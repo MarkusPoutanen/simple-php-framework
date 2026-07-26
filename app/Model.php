@@ -7,47 +7,68 @@ use App\Database;
 
 class Model
 {
-	private static $connection;
-	private static $tableName;
+	private static ?PDO $connection = null;
+	private static string $tableName;
 
-	private static function databaseConnection()
+	/** Establishes and caches database connection */
+	private static function connection(): PDO
 	{
-		Model::$connection = Database::connect();
+		if(self::$connection === null)
+		{
+			self::$connection = Database::connection();
+		}
+
+		return self::$connection;
 	}
 
-	private static function getTableNameFromClassName($model_name)
+	/** Infers and caches database table name from class name */
+	private static function tableName(): string
 	{
-		$class_array = explode('\\', $model_name);
+		$class_array = explode('\\', get_called_class());
 		$class_name = strtolower(array_pop($class_array));
 
 		if(substr($class_name, -1) === 'y')
 		{
-			Model::$tableName = substr($class_name, 0, (strlen($class_name) - 1)) . 'ies';
-			
-			return;
+			self::$tableName = substr($class_name, 0, (strlen($class_name) - 1)) . 'ies';
 		}
-		
-		Model::$tableName = "{$class_name}s";
+		else
+		{
+			self::$tableName = "{$class_name}s";
+		}
+
+		return self::$tableName;
 	}
 
-	public static function all()
+	/** @return array<object> */
+	public static function all(): array
 	{
-		Model::databaseConnection();
-		Model::getTableNameFromClassName(get_called_class());
+		$query = self::connection()->query('SELECT * FROM ' . self::tableName() . ';');
 
-		$models = Model::$connection->query('SELECT * FROM ' . Model::$tableName . ';')->fetchAll(PDO::FETCH_OBJ);
+		if($query === false)
+		{
+			return [];
+		}
 
-		return $models;
+		return $query->fetchAll(PDO::FETCH_OBJ);
 	}
 
-	public static function find($id)
+	public static function find(int $id): bool|object|null
 	{
-		Model::databaseConnection();
-		Model::getTableNameFromClassName(get_called_class());
+		$query = self::connection()->query('SELECT * FROM ' . self::tableName() . " WHERE id = {$id} ORDER BY id ASC LIMIT 1;");
 
-		$model = Model::$connection->query('SELECT * FROM ' . Model::$tableName . ' WHERE id = ' . $id . ' ORDER BY id ASC LIMIT 1;')->fetchObject();
+		if($query === false)
+		{
+			return null;
+		}
 
-		if($model === false)
+		return $query->fetchObject();
+	}
+
+	public static function findOrFail(int $id): object|bool
+	{
+		$model = self::find($id);
+
+		if($model === null)
 		{
 			http_response_code(404);
 			exit;

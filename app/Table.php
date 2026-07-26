@@ -6,27 +6,32 @@ use App\Database;
 
 class Table
 {
-	public static function create($name, $fields)
+	/**
+	 * @param string $name
+	 * @param array<string> $fields
+	 */
+	public static function create(string $name, array $fields): void
 	{
-		$connection = Database::connect();
+		$fields_sql = implode(',', $fields);
 
-		$connection->query('CREATE TABLE ' . $name . '(' . implode(',', $fields) . ');');
+		Database::connection()->query("CREATE TABLE {$name} ({$fields_sql});");
 	}
 
-	public static function column($name, $type, $length = null)
+	public static function column(string $name, string $type, ?int $length = null): string
 	{
-		return $name . ' ' . strtoupper($type) . ($length !== null ? '(' . $length . ')' : '');
+		$type = strtoupper($type);
+		$length = $length !== null ? "({$length})" : '';
+
+		return "{$name} {$type}{$length}";
 	}
 
-	public static function id()
+	public static function id(): string
 	{
 		return 'id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY';
 	}
 
-	public static function drop($name)
+	public static function drop(string $name): void
 	{
-		$connection = Database::connect();
-
-		$connection->query('DROP TABLE ' . $name . ';');
+		Database::connection()->query("DROP TABLE {$name};");
 	}
 }

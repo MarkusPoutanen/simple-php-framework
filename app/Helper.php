@@ -4,7 +4,11 @@ namespace App;
 
 class Helper
 {
-    public static function view($name, $variables = null)
+    /**
+     * @param string $name
+     * @param array<string, mixed> $variables
+     */
+    public static function view(string $name, ?array $variables = []): null
     {
         $full_path = __DIR__ . '/../resources/views/' . strtr($name, ['.' => '/']);
 
@@ -13,16 +17,19 @@ class Helper
             extract($variables);
         }
 
-        if(file_exists($full_path . '.php'))
-        {
-            include $full_path . '.php';
-            return;
-        }
+        $possible_file_paths = [
+            "{$full_path}.php",
+            "{$full_path}.html",
+        ];
 
-        if(file_exists($full_path . '.html'))
+        foreach($possible_file_paths as $file_path)
         {
-            include $full_path . '.html';
-            return;
+            if(file_exists($file_path))
+            {
+                include $file_path;
+
+                return null;
+            }
         }
 
         throw new \Exception('No view named "' . $name . '" in views folder');

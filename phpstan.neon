@@ -13,10 +13,11 @@ parameters:
         - routes/
 
     # Level 10 is the highest level
-    level: 5
+    level: 8
 
-#    ignoreErrors:
-#        - '#PHPDoc tag @var#'
+    ignoreErrors:
+        -
+            identifier: notIdentical.alwaysFalse
 #
 #    excludePaths:
 #        - ./*/*/FileToBeExcluded.php

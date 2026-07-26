@@ -7,7 +7,7 @@ use App\Table;
 
 class CreateArticlesTable implements Migration
 {
-	public static function run()
+	public static function run(): void
 	{
 		Table::create('articles', [
 			Table::id(),
@@ -17,8 +17,8 @@ class CreateArticlesTable implements Migration
 			Table::column('published_at', 'timestamp'),
 		]);
 	}
-	
-	public static function revert()
+
+	public static function revert(): void
 	{
 		Table::drop('articles');
 	}

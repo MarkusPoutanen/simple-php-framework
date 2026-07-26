@@ -6,24 +6,26 @@ use \PDO;
 
 class Database
 {
-	public static function connect()
+	public static function connection(): PDO
 	{
 		$env_path = __DIR__ . '/../.env';
 
 		if(file_exists($env_path) === false)
 		{
-			throw new \Exception('Missing enviroment variables');
+			throw new \Exception('Missing environment variables');
 		}
 
 		$ENV_VALUES = parse_ini_file($env_path);
 
-		$driver = $ENV_VALUES['DB_DRIVER'];
+		$driver = $ENV_VALUES['DB_DRIVER'] 	?? 'mysql';
+		$host 	= $ENV_VALUES['DB_HOST'] 	?? 'localhost';
+		$name 	= $ENV_VALUES['DB_NAME'] 	?? 'simple_php_framework';
 
-		$pdo_values = [
-			'host=' . $ENV_VALUES['DB_HOST'],
-			'dbname=' . $ENV_VALUES['DB_NAME']
-		];
+		$dsn = "{$driver}:host={$host};dbname={$name}";
 
-		return new PDO($driver . ':' . implode(';', $pdo_values), $ENV_VALUES['DB_USER'], $ENV_VALUES['DB_PASSWORD']);
+		$user = $ENV_VALUES['DB_USER'] ?? 'root';
+		$pass = $ENV_VALUES['DB_PASSWORD'] ?? '';
+
+		return new PDO($dsn, $user, $pass);
 	}
 }

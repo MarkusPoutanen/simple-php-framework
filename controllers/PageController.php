@@ -7,24 +7,24 @@ use Models\Article;
 
 class PageController
 {
-    public function frontpage()
+    public function frontpage(): null
     {
         return Helper::view('frontpage');
     }
 
-    public function world()
+    public function world(): null
     {
         return Helper::view('hello.world');
     }
 
-    public function articles()
+    public function articles(): null
     {
         return Helper::view('articles', [
             'articles' => Article::all()
         ]);
     }
 
-    public function show_article($id)
+    public function show_article(int $id): null
     {
         return Helper::view('article', [
             'article' => Article::find($id)

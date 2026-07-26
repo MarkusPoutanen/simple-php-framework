@@ -1,6 +1,6 @@
 # Simple PHP Framework
 
-This is a Laravel-inspired simple custom MVC-based PHP framework.
+This is a Laravel-inspired simple MVC-based PHP framework with no external PHP dependencies.
 
 ## Features
 
@@ -8,18 +8,13 @@ This is a Laravel-inspired simple custom MVC-based PHP framework.
 - Controllers to handle routes
 - Database migrations
 - CLI tool `simple`
-- Models (DB data not yet casted to models)
+- Models (DB data not yet mapped to models)
 - PHP and HTML views with subdirectory support via dot syntax e.g. `dir.view`
-- Asset compilation via Parcel
+- Asset bundling using [Parcel](https://parceljs.org/)
 
-## How to use
+## Framework structure
 
-Clone repository and run `npm install` in root directory.
-
-Routes are defined in `routes/web.php` and controllers are located in `controllers`.
-Routing is handled in `app/Route.php`, `public/index.php` and `.htaccess`.
-
-`app` folder has framework code in it:
+`app/` folder has framework code in it:
 - Database: database connection handling
 - Helper: helper functions
 - Migration: migration interface
@@ -27,15 +22,23 @@ Routing is handled in `app/Route.php`, `public/index.php` and `.htaccess`.
 - Route: saves routes to static array
 - Table: database table functions
 
-`cli` folder has class for the `simple` cli-tool. `simple` file has PHP code for handling commands for Simple.
+`cli/` folder has class for the `simple` cli-tool.<br>
+`simple` file has PHP code for handling commands for Simple.
 
-Views are defined in `resources/views`. PHP and HTML views are supported. Views can also be in sudirectories using dot syntax e.g. `sub.dir.file`. File extension should be omitted.
+## How to use
 
-Assets can be compiled with Parcel using npm scripts: `dev`, `watch` or `prod`. Scripts use TypeScript and styles use SCSS. Source assets are located in `resources/js` and `resources/css`.
+Clone repository and run `npm install` in root directory.
+
+**Routes** are defined in `routes/web.php` and controllers are located in `controllers/`.<br>
+Routing is handled in `app/Route.php` and `public/index.php`.
+
+**Views** are defined in `resources/views/`. PHP and HTML views are supported. Views can also be in sudirectories using dot syntax e.g. `sub.dir.file`. File extension should be omitted.
+
+**Assets** can be bundled with Parcel using npm scripts: `dev`, `watch` or `prod`. Scripts use TypeScript and styles use SCSS. Source assets are located in `resources/js/` and `resources/css/`.
 
 ## Code quality
 
-This project uses PHPStan for static analysis.
+This project uses [PHPStan](https://phpstan.org/) for static analysis.
 
 ## Contributions
 

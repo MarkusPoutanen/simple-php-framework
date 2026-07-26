@@ -11,7 +11,7 @@ if(file_exists(__DIR__ . '/../.env') === false)
     exit;
 }
 
-$path = isset($_GET['path']) ? $_GET['path'] : '/';
+$path = $_SERVER['REQUEST_URI'];
 
 // Match static paths
 if(in_array($path, array_keys(Route::$routes)))

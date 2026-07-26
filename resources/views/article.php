@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<?php require "common/head.php" ?>
-		<title><?php $article->heading ?></title>
+		<title><?= $article->heading ?></title>
 	</head>
 	<body>
 		<main class="main">

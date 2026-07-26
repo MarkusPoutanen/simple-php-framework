@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Database;
+use App\DB;
 
 class Table
 {
@@ -14,7 +14,7 @@ class Table
 	{
 		$fields_sql = implode(',', $fields);
 
-		Database::connection()->query("CREATE TABLE {$name} ({$fields_sql});");
+		DB::connection()->query("CREATE TABLE {$name} ({$fields_sql});");
 	}
 
 	public static function column(string $name, string $type, ?int $length = null): string
@@ -32,6 +32,6 @@ class Table
 
 	public static function drop(string $name): void
 	{
-		Database::connection()->query("DROP TABLE {$name};");
+		DB::connection()->query("DROP TABLE {$name};");
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace Cli;
 
-use App\Database;
+use App\DB;
 use App\Table;
 use PDO;
 
@@ -26,7 +26,7 @@ class Simple
 
 	public static function migrations(): void
 	{
-		$connection = Database::connection();
+		$connection = DB::connection();
 
 		$done_migrations = Simple::getDoneMigrations();
 
@@ -68,7 +68,7 @@ class Simple
 	/** @return array<string> */
 	private static function getDoneMigrations(): array
 	{
-		$connection = Database::connection();
+		$connection = DB::connection();
 
 		try
 		{

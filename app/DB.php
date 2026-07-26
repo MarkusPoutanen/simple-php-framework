@@ -4,7 +4,7 @@ namespace App;
 
 use \PDO;
 
-class Database
+class DB
 {
 	private static ?PDO $connection = null;
 

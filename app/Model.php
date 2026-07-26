@@ -3,7 +3,7 @@
 namespace App;
 
 use \PDO;
-use App\Database;
+use App\DB;
 
 class Model
 {
@@ -30,7 +30,7 @@ class Model
 	/** @return array<object> */
 	public static function all(): array
 	{
-		$query = Database::connection()->query('SELECT * FROM ' . self::tableName() . ';');
+		$query = DB::connection()->query('SELECT * FROM ' . self::tableName() . ';');
 
 		if($query === false)
 		{
@@ -42,7 +42,7 @@ class Model
 
 	public static function find(int $id): bool|object|null
 	{
-		$query = Database::connection()->query('SELECT * FROM ' . self::tableName() . " WHERE id = {$id} ORDER BY id ASC LIMIT 1;");
+		$query = DB::connection()->query('SELECT * FROM ' . self::tableName() . " WHERE id = {$id} ORDER BY id ASC LIMIT 1;");
 
 		if($query === false)
 		{

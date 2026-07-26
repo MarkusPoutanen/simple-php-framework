@@ -27,7 +27,8 @@ This is a Laravel-inspired simple MVC-based PHP framework with no external PHP d
 
 ## How to use
 
-Clone repository and run `npm install` in root directory.
+Clone repository and run `php simple install` and `php simple migrate` in root directory.<br>
+If you want to edit assets you need to also run `npm install`.
 
 **Routes** are defined in `routes/web.php` and controllers are located in `controllers/`.<br>
 Routing is handled in `app/Route.php` and `public/index.php`.

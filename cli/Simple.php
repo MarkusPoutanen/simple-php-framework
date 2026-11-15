@@ -3,6 +3,7 @@
 namespace Cli;
 
 use App\DB;
+use App\Migration;
 use App\Table;
 use PDO;
 
@@ -47,6 +48,7 @@ class Simple
 
             $class = 'Migrations\\' . explode('.', $filename)[0];
 
+            /** @var Migration */
             $migration = new $class;
 
             try

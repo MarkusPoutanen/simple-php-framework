@@ -1,4 +1,5 @@
-# includes:
+includes:
+    - phar://phpstan.phar/conf/bleedingEdge.neon
 
 parameters:
 
@@ -16,8 +17,7 @@ parameters:
     level: 8
 
     ignoreErrors:
-        -
-            identifier: notIdentical.alwaysFalse
-#
-#    excludePaths:
-#        - ./*/*/FileToBeExcluded.php
+        - identifier: notIdentical.alwaysFalse
+
+    excludePaths:
+        - resources/views/

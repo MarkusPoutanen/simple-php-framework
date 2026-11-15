@@ -4,10 +4,7 @@ namespace App;
 
 class Helper
 {
-    /**
-     * @param string $name
-     * @param array<string, mixed> $variables
-     */
+    /** @param array<string, mixed> $variables */
     public static function view(string $name, ?array $variables = []): null
     {
         $full_path = __DIR__ . '/../resources/views/' . strtr($name, ['.' => '/']);

@@ -4,7 +4,7 @@ namespace App;
 
 interface Migration
 {
-	public static function run(): void;
+    public static function run(): void;
 
-	public static function revert(): void;
+    public static function revert(): void;
 }

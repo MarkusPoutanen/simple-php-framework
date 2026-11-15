@@ -1,0 +1,107 @@
+{
+    "preset": "empty",
+    "exclude": [
+        "resources/views/"
+    ],
+    "rules": {
+        "elseif": false,
+        "braces_position": false,
+        "binary_operator_spaces": false,
+        "method_chaining_indentation": false,
+
+        "array_push": true,
+        "line_ending": true,
+        "ordered_imports": true,
+        "no_unused_imports": true,
+        "no_extra_blank_lines": true,
+        "statement_indentation": true,
+        "no_alternative_syntax": true,
+        "control_structure_braces": true,
+        "single_blank_line_at_eof": true,
+
+        "concat_space": {
+            "spacing": "one"
+        },
+        "cast_spaces": {
+            "space": "none"
+        },
+        "control_structure_continuation_position": {
+            "position": "next_line"
+        },
+        "function_declaration": {
+            "closure_fn_spacing": "none"
+        },
+        "class_attributes_separation": {
+            "elements": {
+                "method": "one",
+                "property": "one",
+                "trait_import": "none",
+                "case": "none"
+            }
+        },
+        "blank_line_before_statement": {
+            "statements": [
+                "break",
+                "continue",
+                "declare",
+                "return",
+                "throw",
+                "try",
+                "if"
+            ]
+        },
+        "single_space_around_construct": {
+            "constructs_followed_by_a_single_space": [
+                "abstract",
+                "as",
+                "attribute",
+                "case",
+                "class",
+                "clone",
+                "comment",
+                "const",
+                "const_import",
+                "echo",
+                "enum",
+                "extends",
+                "final",
+                "function_import",
+                "global",
+                "goto",
+                "implements",
+                "include",
+                "include_once",
+                "instanceof",
+                "insteadof",
+                "interface",
+                "named_argument",
+                "namespace",
+                "new",
+                "open_tag_with_echo",
+                "php_doc",
+                "php_open",
+                "print",
+                "private",
+                "private_set",
+                "protected",
+                "protected_set",
+                "public",
+                "public_set",
+                "readonly",
+                "require",
+                "require_once",
+                "return",
+                "static",
+                "throw",
+                "trait",
+                "type_colon",
+                "use",
+                "use_lambda",
+                "use_trait",
+                "var",
+                "yield",
+                "yield_from"
+            ]
+        }
+    }
+}
